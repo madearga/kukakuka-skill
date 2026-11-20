@@ -1,0 +1,7 @@
+{
+  "name": "kukakuka-skill",
+  "version": "0.2.0",
+  "description": "Kumpulan skill agen berbahasa Indonesia: kukatanya (tanya jawab ide), kukajalan (pemandu alur ide sampai PR), kukaspek + kukatiket (spec dan tiket), kukaarsitektur + kukadesain + kukadomain (arsitektur dan domain), refleksi (retro pasca-putaran), dan empat skill verifikasi turunan pstack.",
+  "keywords": ["pi-package"],
+  "license": "SEE LICENSE IN NOTICE.md"
+}
