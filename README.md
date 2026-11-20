@@ -47,4 +47,4 @@ alat/uji-kukajalan.sh  # kuka-status.sh pada repo tiruan, tahap 0 sampai 5 + kas
 
 ## Lisensi
 
-Campuran, per folder: `kukatanya` dan `kukajalan` semua hak dilindungi; empat skill verifikasi MIT. Rincian di [NOTICE.md](NOTICE.md).
+Campuran, per folder: `kukatanya`, `kukajalan`, `kukaspek`, `kukatiket` semua hak dilindungi; delapan skill terjemahan MIT. Rincian di [NOTICE.md](NOTICE.md).

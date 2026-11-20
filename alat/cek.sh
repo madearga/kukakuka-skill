@@ -52,9 +52,15 @@ if [ -d "$UP" ]; then
   done
 else echo "lewati: upstream tidak ditemukan di $UP"; fi
 
-# 5. setiap folder skill tercatat di README (tautan)
+# 5. setiap folder skill tercatat di README (tautan) dan NOTICE (baris tabel)
 for d in skills/*/; do d=${d%/}
   grep -qF "]($d/SKILL.md)" README.md || lapor "README tidak mencantumkan $d"
+  grep -qF "\`$d/\`" NOTICE.md || lapor "NOTICE tidak mencantumkan $d"
+done
+
+# 6. setiap pemegang hak cipta MIT di NOTICE juga tercantum di LICENSE
+grep '| MIT' NOTICE.md | sed 's/.*© [0-9]\{4\} //;s/ |.*//' | sort -u | while read -r p; do
+  grep -qF "$p" LICENSE || lapor "pemegang MIT tidak ada di LICENSE: $p"
 done
 
 # 6. terjemahan skill MIT lain setara dengan upstream: heading, butir tebal, langkah bernomor, fence,
