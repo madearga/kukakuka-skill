@@ -69,13 +69,13 @@ fitur: <slug-fitur>
 1. Jalankan skill `kukatanya`. Patuhi aturannya sepenuhnya; kukajalan tidak melonggarkan satu pun.
 2. Di tahap ini **bertanya adalah tugas**. `principle-never-block-on-the-human` tidak berlaku di tahap 1–3.
 3. Tingkat `berat`: sebelum keputusan arsitektur dikunci, tawarkan `architect` fase A–C saja, dengan checkpoint ke user. Alternatif dan pertanyaan terbuka dari rationale-nya kembali ke daftar keputusan dan ADR kukatanya. Jangan biarkan `architect` masuk fase implementasi.
-4. Saat kukatanya selesai, tulis `label-kukatanya:` dan `dokumen-keputusan:` (path dokumen spesifikasi yang disepakati kukatanya) ke `.kuka/jalan.md`. Hanya `label-kukatanya` yang menjadi gerbang; `dokumen-keputusan` adalah catatan untuk `kukaspek` dan tidak dicek skrip.
+4. Saat kukatanya selesai, tulis `label-kukatanya:` dan `dokumen-keputusan:` (path `.scratch/<fitur>/keputusan.md`; jangan spec.md) ke `.kuka/jalan.md`. `label-kukatanya` menjadi gerbang; `dokumen-keputusan` jadi rujukan `kukaspek` dan dicek skrip untuk satu hal: nilainya tidak boleh sama dengan `.scratch/<fitur>/spec.md`.
 5. Gerbang: label `dihentikan` berarti **berhenti**. Laporkan penghambatnya; jangan lanjut ke tahap 2.
 
 ### Tahap 2: spesifikasi
 
 1. Jalankan skill `kukaspek`. Patuhi aturannya sepenuhnya; kukajalan tidak melonggarkan satu pun.
-2. Jalankan skrip status. Gerbang skrip: spec ada dan tidak kosong. Pastikan sendiri bagian seam tes sudah terisi (tidak dicek skrip); tanpa seam di spec, tiket di tahap 3 tidak punya rujukan **Seam**.
+2. Jalankan skrip status. Gerbang skrip: spec ada dan tidak kosong, dan `dokumen-keputusan` tidak menunjuk spec.md (penahan agar tahap 2 tidak terlewat). Pastikan sendiri bagian seam tes sudah terisi (tidak dicek skrip); tanpa seam di spec, tiket di tahap 3 tidak punya rujukan **Seam**.
 
 ### Tahap 3: tiket
 

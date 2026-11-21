@@ -46,9 +46,9 @@ Sesi memakai empat tempat. Jangan menambah jenis dokumen kelima tanpa persetujua
 | Istilah | `GLOSSARY.md` di root, atau per konteks sesuai `GLOSSARY-MAP.md` |
 | Keputusan besar | `docs/adr/`, atau folder ADR konteks |
 | Aturan domain dan spesifikasi | satu dokumen spesifikasi/desain yang sudah ada di repo |
-| Daftar keputusan dan status terbuka | dokumen spesifikasi yang sama |
+| Daftar keputusan dan status terbuka | dokumen keputusan terpisah; di alur kukajalan: `.scratch/<fitur>/keputusan.md` |
 
-Tanyakan lokasinya di round pertama jika belum jelas. Jika repo belum punya dokumen spesifikasi, tanyakan dulu. Catat tempat yang disepakati di awal sesi.
+Tanyakan lokasinya di round pertama jika belum jelas. Jika repo belum punya dokumen spesifikasi, tanyakan dulu; bila dokumen keputusan belum ada, kukatanya boleh membuatnya sebagai draf — jangan taruh daftar keputusan di `spec.md` milik tahap 2 kukajalan. Catat tempat yang disepakati di awal sesi.
 
 ## Fakta dan keputusan
 

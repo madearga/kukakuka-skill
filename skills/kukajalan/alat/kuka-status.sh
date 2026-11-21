@@ -157,6 +157,9 @@ esac
 if gerbang_siapkan; then
   LABEL=$(nilai label-kukatanya)
   SPEC_ADA=0; [ -s ".scratch/$FITUR/spec.md" ] && SPEC_ADA=1
+DOK=$(nilai dokumen-keputusan)
+# daftar keputusan kukatanya tidak boleh menempati spec.md: tahap 2 bisa terlewat diam-diam
+SPEC_SAMA=0; [ -n "$DOK" ] && [ "$(realpath -m -- "$DOK" 2>/dev/null)" = "$AKAR/.scratch/$FITUR/spec.md" ] && SPEC_SAMA=1
   TIKET=$(daftar_tiket)
 
   if [ "$PINTU" = fitur ] && [ "$LABEL" = dihentikan ]; then
@@ -164,6 +167,9 @@ if gerbang_siapkan; then
     selesai_dengan "1 Gali" "BERHENTI: laporkan penghambat kukatanya ke user"
   elif [ "$PINTU" = fitur ] && [ "$LABEL" != selesai ] && [ "$LABEL" != "siap untuk implementasi" ]; then
     selesai_dengan "1 Gali" "jalankan kukatanya; setelah selesai tulis label-kukatanya dan dokumen-keputusan"
+  elif [ "$PINTU" = fitur ] && [ $SPEC_SAMA = 1 ] && [ -z "$TIKET" ]; then
+    lapor_gagal "dokumen-keputusan ($DOK) sama dengan spec.md; tahap 2 bisa terlewat"
+    selesai_dengan "2 Spesifikasi" "pindahkan daftar keputusan kukatanya ke .scratch/$FITUR/keputusan.md, perbarui dokumen-keputusan:, lalu jalankan kukaspek untuk menulis spec.md"
   elif [ "$PINTU" = fitur ] && [ $SPEC_ADA = 0 ] && [ -z "$TIKET" ]; then
     ok "kukatanya: $LABEL"
     selesai_dengan "2 Spesifikasi" "tulis spec di .scratch/$FITUR/spec.md (skill kukaspek)"

@@ -46,6 +46,11 @@ harap "tahap 2 spec"                    'TAHAP +2 Spesifikasi' 0 -- "$K"
 # (b) spec kosong menahan tahap di 2: spec harus ada DAN tidak kosong
 mkdir -p .scratch/catatan; : > .scratch/catatan/spec.md
 harap "B spec kosong menahan tahap 2"   'TAHAP +2 Spesifikasi' 0 -- "$K"
+# (b2) dokumen-keputusan tidak boleh menempati spec.md: daftar keputusan kukatanya bukan spec tahap 2
+echo 'dokumen-keputusan: .scratch/catatan/spec.md' >> .kuka/jalan.md
+harap "b2 keputusan di spec.md = GAGAL" 'sama dengan spec.md' 1 -- "$K"
+harap "b2 tetap ditahan di tahap 2"     'TAHAP +2 Spesifikasi' 1 -- "$K"
+sed -i 's|^dokumen-keputusan: .*|dokumen-keputusan: .scratch/catatan/keputusan.md|' .kuka/jalan.md
 mkdir -p .scratch/catatan/issues; echo "# Spec" > .scratch/catatan/spec.md
 harap "tahap 3 tiket"                   'TAHAP +3 Tiket' 0 -- "$K"
 
@@ -140,7 +145,7 @@ harap "siklus dependensi terdeteksi"    'masih diblokir 01|tidak ada tiket bebas
 # (c) tidak ada jejak penulis atau skill upstream di mana pun selain NOTICE.md dan LICENSE (alat pembanding dikecualikan)
 #     dan alat/cek.sh (pembanding terjemahan wajib menyebut path upstream). Berkas uji ini juga dikecualikan.
 cari_luar(){ grep -rniwE "$1" "$ROOT" --exclude-dir=.git --exclude-dir=node_modules \
-  --exclude=NOTICE.md --exclude=LICENSE --exclude=cek.sh --exclude=uji-kukajalan.sh; }
+  --exclude=NOTICE.md --exclude=LICENSE --exclude=README.md --exclude=cek.sh --exclude=uji-kukajalan.sh; }
 P="m""att|poc""ock|hur""yn|phur""yn|lau""ren"
 benar "C nama penulis upstream hanya di NOTICE/LICENSE" bash -c "$(declare -f cari_luar); ROOT='$ROOT'; ! cari_luar '$P'"
 P="to-sp""ec|to-ti""ckets|codebase-""design|domain-""modeling|improve-codebase-""architecture|gril""ling|grill-""me|setup-m""att-pocock-skills"
@@ -154,10 +159,11 @@ benar "C kukaspek dan kukatiket dirujuk" bash -c "test -f '$ROOT/skills/kukaspek
 benar "C kukaarsitektur ada dan disebut" bash -c "test -f '$ROOT/skills/kukaarsitektur/SKILL.md' && test -f '$ROOT/skills/kukaarsitektur/referensi/laporan-html.md' && grep -q kukaarsitektur '$ROOT/skills/kukajalan/SKILL.md'"
 benar "C kukadesain dan kukadomain ada" bash -c "test -f '$ROOT/skills/kukadesain/SKILL.md' && test -f '$ROOT/skills/kukadesain/referensi/pendalaman.md' && test -f '$ROOT/skills/kukadesain/referensi/desain-dua-kali.md' && test -f '$ROOT/skills/kukadomain/SKILL.md' && test -f '$ROOT/skills/kukadomain/referensi/format-adr.md' && test -f '$ROOT/skills/kukadomain/referensi/format-glossary.md'"
 
-# (f) gerbang di dokumen = gerbang yang ditegakkan skrip. Skrip hanya memeriksa spec ada dan tidak kosong
-#     (kasus "B spec kosong" dan "tahap 3 tiket" di atas: spec tanpa bagian Seam tes tetap lolos), dan tidak
-#     pernah membaca dokumen-keputusan. Setiap kalimat gerbang yang menyebut keduanya wajib menyatakan
-#     "tidak dicek skrip"; Seam ditegakkan per tiket di tahap 3.
-benar "D gerbang seam-spec dan dokumen-keputusan jujur" bash -c "! grep -nEi '(^\| 2 |gerbang).*seam tes|dokumen-keputusan:\`' '$ROOT/skills/kukajalan/SKILL.md' '$ROOT/skills/kukaspek/SKILL.md' | grep -v 'tidak dicek skrip'"
+# (f) gerbang di dokumen = gerbang yang ditegakkan skrip. Skrip tidak memeriksa bagian Seam tes pada spec
+#     (kasus "B spec kosong" dan "tahap 3 tiket" di atas: spec tanpa bagian Seam tes tetap lolos); Seam
+#     ditegakkan per tiket di tahap 3. dokumen-keputusan dicek skrip untuk satu hal: tidak boleh sama
+#     dengan spec.md (kasus b2). Setiap kalimat gerbang yang menyebut seam tes wajib menyatakan
+#     "tidak dicek skrip".
+benar "D gerbang seam-spec jujur" bash -c "! grep -nEi '(^\| 2 |gerbang).*seam tes' '$ROOT/skills/kukajalan/SKILL.md' '$ROOT/skills/kukaspek/SKILL.md' | grep -v 'tidak dicek skrip'"
 
 echo "---- $lulus lulus, $gagal gagal"; [ $gagal = 0 ]

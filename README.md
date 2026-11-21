@@ -37,12 +37,25 @@ git clone --depth 1 https://github.com/madearga/kukakuka-skill.git /tmp/kukakuka
 
 Padanan alat per runtime untuk skill verifikasi: [`platform.md`](skills/buat-skill-verifikasi/referensi/platform.md).
 
+## Prasyarat alur penuh
+
+`kukajalan` tahap 4–5 memanggil skill pstack yang tidak ikut paket ini: `deslop` dan `diagnosing-bugs` (tahap 4), `no-mistakes` dan `babysit` (tahap 5). Pasang dari sumbernya — daftar dan alasannya di [`referensi/pstack.md`](skills/kukajalan/referensi/pstack.md). Tanpa mereka, alur berhenti di skill yang disebutnya; kukajalan tidak menggantinya dengan improvisasi.
+
 ## Memeriksa
 
 ```bash
 alat/cek.sh          # tautan, kontrak peta fitur, kesetaraan jumlah heading/butir/langkah dengan upstream pstack
 alat/cek-hermes.sh   # validator SKILL.md milik Hermes sendiri, untuk semua skill
 alat/uji-kukajalan.sh  # kuka-status.sh pada repo tiruan, tahap 0 sampai 5 + kasus yang wajib ditolak
+```
+
+`cek.sh` membandingkan terjemahan dengan clone upstream; siapkan dulu (commit di header skrip):
+
+```bash
+git clone https://github.com/michael-denyer/pstack-claude && git -C pstack-claude checkout c2ade4b
+git clone https://github.com/mattpocock/skills /tmp/up-matt && git -C /tmp/up-matt checkout abeeaf9
+git clone https://github.com/phuryn/pm-skills /tmp/up-pm && git -C /tmp/up-pm checkout 9af7bfd
+bash alat/cek.sh pstack-claude/plugins/pstack/skills   # arg. 2–3 bawaan: /tmp/up-matt/..., /tmp/up-pm/...
 ```
 
 ## Lisensi

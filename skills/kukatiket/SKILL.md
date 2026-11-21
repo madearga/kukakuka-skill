@@ -16,14 +16,15 @@ Bahan: `.scratch/<fitur>/spec.md` (dari `kukaspek`). Belum ada spec → arahkan 
    ```
    # <judul singkat, kata kerja>
 
-   ## Apa
-   <perubahan yang dibuat, 1-3 kalimat>
+   **What to build:** <perubahan yang dibuat, 1-3 kalimat>
 
-   Seam: <titik uji yang disepakati di spec>
+   **Seam:** <titik uji yang disepakati di spec>
 
-   Bukti selesai: <perintah/pengecekan yang membuktikan tiket ini selesai>
+   **Bukti selesai:** `<perintah yang dijalankan>` → <hasil yang diharapkan dari benda aslinya>
 
-   Blocked by: <nomor tiket saja (01, 02) / nama berkas tiket / None>
+   **Blocked by:** <nomor tiket saja (01, 02) / nama berkas tiket / None>
+
+   **Status:** ready-for-agent
    ```
 
 2. Baris wajib tiap tiket: **Seam** dan **Bukti selesai**. **Blocked by** hanya boleh nomor tiket, nama berkas tiket, atau `None` — judul tiket ditolak skrip.

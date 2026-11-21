@@ -10,7 +10,7 @@ Satu baris `kunci: nilai` per kunci. Skrip `kuka-status.sh` hanya membaca kunci 
 | `tingkat` | `ringan`, `standar`, atau `berat` | mulai |
 | `fitur` | slug fitur, sama dengan folder `.scratch/<fitur>/` | mulai |
 | `label-kukatanya` | `selesai`, `dihentikan`, atau `siap untuk implementasi` | akhir tahap 1 |
-| `dokumen-keputusan` | path dokumen spesifikasi kukatanya | akhir tahap 1 |
+| `dokumen-keputusan` | path dokumen keputusan kukatanya, default `.scratch/<fitur>/keputusan.md`; tidak boleh sama dengan `spec.md` | akhir tahap 1 |
 
 `.kuka/` di-commit bersama kode: status alur dan bukti ikut terlihat di PR. Isinya:
 
